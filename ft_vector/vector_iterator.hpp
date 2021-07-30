@@ -19,22 +19,45 @@ namespace ft
 
 	private:
 		pointer _ptr;
+
 	public:
 		vector_iterator (pointer _ptr = 0): _ptr(_ptr) {};
 		
-		vector_iterator (const vector_iterator & it): _ptr(it._ptr) {}
-		vector_iterator operator=(const vector_iterator & it) { _ptr = it._ptr;
-		return *this;}
-		bool operator==(const vector_iterator & it) const { return (_ptr == it._ptr);}
-		bool operator!=(const vector_iterator & it) const { return (_ptr != it._ptr);}
-		bool operator>=(const vector_iterator & it) const { return (_ptr >= it._ptr);}
-		bool operator<=(const vector_iterator & it) const { return (_ptr <= it._ptr);}
-		bool operator>(const vector_iterator & it) const { return (_ptr > it._ptr);}
-		bool operator<(const vector_iterator & it) const { return (_ptr < it._ptr);}
-		reference operator*() {return(*_ptr);}
-		const_reference operator*() const {return(*_ptr);}
-		pointer operator->() {return (_ptr);}
-		const_pointer operator->() const {return (_ptr);}
+		vector_iterator (const vector_iterator & other): _ptr(other._ptr) {}
+		vector_iterator operator=(const vector_iterator & other) {
+			_ptr = other._ptr;
+			return *this;
+		}
+		bool operator==(const vector_iterator & it) const {
+			return (_ptr == it._ptr);
+		}
+		bool operator!=(const vector_iterator & it) const {
+			return (_ptr != it._ptr);
+		}
+		bool operator>=(const vector_iterator & it) const {
+			return (_ptr >= it._ptr);
+		}
+		bool operator<=(const vector_iterator & it) const {
+			return (_ptr <= it._ptr);
+		}
+		bool operator>(const vector_iterator & it) const {
+			return (_ptr > it._ptr);
+		}
+		bool operator<(const vector_iterator & it) const {
+			return (_ptr < it._ptr);
+		}
+		reference operator*() {
+			return(*_ptr);
+		}
+		const_reference operator*() const {
+			return(*_ptr);
+		}
+		pointer operator->() {
+			return (_ptr);
+		}
+		const_pointer operator->() const {
+			return (_ptr);
+		}
 		vector_iterator & operator++() {
 			_ptr++;
 			return (*this);
@@ -155,10 +178,7 @@ namespace ft
 	}
 
 	template<typename T>
-	ft::vector_iterator<T> operator+(
-		typename ft::vector_iterator<T>::difference_type n,
-		typename ft::vector_iterator<T>& rai)
-		{
+	ft::vector_iterator<T> operator+(typename ft::vector_iterator<T>::difference_type n, typename ft::vector_iterator<T>& rai) {
 			return (&(*rai) + n);
-		}
+	}
 }

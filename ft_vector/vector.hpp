@@ -4,7 +4,7 @@
 #include <cstdlib>
 
 #include "vector_iterator.hpp"
-#include "reverse_iterator.hpp"
+#include "../iterators/reverse_iterator.hpp"
 #include "../utils.hpp"
 
 namespace ft{
