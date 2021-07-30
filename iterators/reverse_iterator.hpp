@@ -141,7 +141,7 @@ class	reverse_iterator
 	}
 
 	template <class Iterator_L, class Iterator_R>
-	bool operator>= (const reverse_iterator<Iterator_L>& lhs, const reverse_iterator<Iterator_R>& rhs) {
+	bool operator>= (const reverse_iterator<Iterator_L>& lhs, const reverse_iterator<Iterator_R>& rhs) {
 		return (lhs.base() <= rhs.base());
 	}
 }
