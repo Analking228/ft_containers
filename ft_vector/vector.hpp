@@ -105,11 +105,11 @@ namespace ft{
 		size_type max_size() const {
 			return _Alloc.max_size();
 		}
-		iterator erase (iterator position) {
-			return (erase(position, position + 1));
+		iterator erase (iterator pos) {
+			return (erase(pos, pos + 1));
 		}
-		const_iterator erase (iterator position) const {
-			return (erase(position, position + 1));
+		const_iterator erase (iterator pos) const {
+			return (erase(pos, pos + 1));
 		}
 		iterator erase (iterator first, iterator last) {
 			if (last <= first)
@@ -144,23 +144,23 @@ namespace ft{
 		bool empty() const {
 			return _Size == 0;
 		}
-		reference operator[](size_type position) {
-			return *(_Ptr + position);
+		reference operator[](size_type pos) {
+			return *(_Ptr + pos);
 		}
-		const_reference operator[](size_type position) const {
-			return *(_Ptr + position);
+		const_reference operator[](size_type pos) const {
+			return *(_Ptr + pos);
 		}
-		reference at(size_type position) { 
-			if (position < 0 || position >= size())
+		reference at(size_type pos) { 
+			if (pos < 0 || pos >= size())
    				throw std::out_of_range("Out of range");
 
-			return *(_Ptr + position);
+			return *(_Ptr + pos);
 		}
-		const_reference at(size_type position) const {
-			if (position < 0 || position >= size())
+		const_reference at(size_type pos) const {
+			if (pos < 0 || pos >= size())
    				throw std::out_of_range("Out of range");
 
-			return *(_Ptr + position);
+			return *(_Ptr + pos);
 		}
 		reference front() {
 			return *begin();
@@ -207,60 +207,60 @@ namespace ft{
 		void pop_back(){
 			erase(end() - 1);
 		}
-		iterator insert (iterator position, const value_type& val){
-			difference_type move = position - begin();
+		iterator insert (iterator pos, const value_type& val){
+			difference_type move = pos - begin();
 			size_type n = 1;
 
 			if (_Capacity < _Size + n)
 			reserve(std::max(_Size * 2, _Size + n));
-			position = begin() + move;
-			for (iterator ptr = end() + n - 1; ptr >= position + n; ptr--) {
+			pos = begin() + move;
+			for (iterator ptr = end() + n - 1; ptr >= pos + n; ptr--) {
 				_Alloc.construct(ptr.base(), *(ptr - n));
 				_Alloc.destroy(ptr.base() - n);
 			}
-			for (iterator ptr = position + n - 1; ptr >= position; --ptr)
+			for (iterator ptr = pos + n - 1; ptr >= pos; --ptr)
 				_Alloc.construct(ptr.base(), val);
 			_Size += n;
 
-			return position;
+			return pos;
 		}
-		void insert (iterator position, size_type n, const value_type& val){
-			difference_type move = position - begin();
+		void insert (iterator pos, size_type n, const value_type& val){
+			difference_type move = pos - begin();
 
 			if (n == 0 || move < 0)
 				return;
 			if (_Capacity < _Size + n)
 			reserve(std::max(_Size * 2, _Size + n));
-			position = begin() + move;
-			for (iterator ptr = end() + n - 1; ptr >= position + n; ptr--)
+			pos = begin() + move;
+			for (iterator ptr = end() + n - 1; ptr >= pos + n; ptr--)
 			{
 				_Alloc.construct(ptr.base(), *(ptr - n));
 				_Alloc.destroy(ptr.base() - n);
 			}
-			for (iterator ptr = position + n - 1; ptr >= position; --ptr)
+			for (iterator ptr = pos + n - 1; ptr >= pos; --ptr)
 				_Alloc.construct(ptr.base(), val);
 			_Size += n;
 		}
 
 		template <class InputIterator>
-		void insert (iterator position, InputIterator f, InputIterator l, typename ft::enable_if<!ft::is_integral<InputIterator>::value>::type* = 0) {
+		void insert (iterator pos, InputIterator f, InputIterator l, typename ft::enable_if<!ft::is_integral<InputIterator>::value>::type* = 0) {
 			vector<T> vec(f, l);
 			iterator first = vec.begin();
 			iterator last = vec.end();
 			difference_type dist = 0;
-			difference_type pos = position - begin();
+			difference_type position = pos - begin();
 
 			for (iterator i = first; i != last; i++)
 				dist++;
 			if (_Capacity < _Size + dist)
 				reserve(std::max(_Size * 2, _Size + dist));
-			position = begin() + pos;
-			for (iterator ptr = _Ptr + dist + _Size - 1; ptr >= position + dist; ptr--)
+			pos = begin() + position;
+			for (iterator ptr = _Ptr + dist + _Size - 1; ptr >= pos + dist; ptr--)
 				{
 					_Alloc.construct(ptr.base(), *(ptr - dist));
 					_Alloc.destroy(ptr.base() - dist);
 				}
-			for (iterator ptr = position ; ptr != position + dist; ptr++, first++)
+			for (iterator ptr = pos ; ptr != position + dist; ptr++, first++)
 				_Alloc.construct(ptr.base(), *first);
 			_Size += dist;
 		}
