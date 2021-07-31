@@ -18,55 +18,55 @@ namespace ft
 		typedef Category											iterator_category;
 
 	private:
-		pointer _ptr;
+		pointer _Ptr;
 
 	public:
-		vector_iterator (pointer _ptr = 0): _ptr(_ptr) {};
+		vector_iterator (pointer _Ptr = 0): _Ptr(_Ptr) {};
 		
-		vector_iterator (const vector_iterator & other): _ptr(other._ptr) {}
+		vector_iterator (const vector_iterator & other): _Ptr(other._Ptr) {}
 		vector_iterator operator=(const vector_iterator & other) {
-			_ptr = other._ptr;
+			_Ptr = other._Ptr;
 			return *this;
 		}
 		bool operator==(const vector_iterator & it) const {
-			return (_ptr == it._ptr);
+			return (_Ptr == it._Ptr);
 		}
 		bool operator!=(const vector_iterator & it) const {
-			return (_ptr != it._ptr);
+			return (_Ptr != it._Ptr);
 		}
 		bool operator>=(const vector_iterator & it) const {
-			return (_ptr >= it._ptr);
+			return (_Ptr >= it._Ptr);
 		}
 		bool operator<=(const vector_iterator & it) const {
-			return (_ptr <= it._ptr);
+			return (_Ptr <= it._Ptr);
 		}
 		bool operator>(const vector_iterator & it) const {
-			return (_ptr > it._ptr);
+			return (_Ptr > it._Ptr);
 		}
 		bool operator<(const vector_iterator & it) const {
-			return (_ptr < it._ptr);
+			return (_Ptr < it._Ptr);
 		}
 		reference operator*() {
-			return(*_ptr);
+			return(*_Ptr);
 		}
 		const_reference operator*() const {
-			return(*_ptr);
+			return(*_Ptr);
 		}
 		pointer operator->() {
-			return (_ptr);
+			return (_Ptr);
 		}
 		const_pointer operator->() const {
-			return (_ptr);
+			return (_Ptr);
 		}
 		vector_iterator & operator++() {
-			_ptr++;
+			_Ptr++;
 			return (*this);
 		}
 		pointer base() {
-			return _ptr;
+			return _Ptr;
 		}
 		const_pointer base() const {
-			return _ptr;
+			return _Ptr;
 		}
 		vector_iterator operator++(int) {
 			vector_iterator result = *this;
@@ -74,7 +74,7 @@ namespace ft
 			return (result);
 		}
 		vector_iterator & operator--() {
-			_ptr--;
+			_Ptr--;
 			return (*this);
 		}
 		vector_iterator operator--(int) {
@@ -83,27 +83,27 @@ namespace ft
 			return (result);
 		}
 		vector_iterator & operator+=(difference_type n) {
-			_ptr += n;
+			_Ptr += n;
 			return (*this);
 		}
 		vector_iterator & operator-=(difference_type n) {
-			_ptr -= n;
+			_Ptr -= n;
 			return (*this);
 		}
 		vector_iterator operator+(difference_type n) const {
-			return (_ptr + n);
+			return (_Ptr + n);
 		}
 		vector_iterator operator-(difference_type n) const {
-			return (_ptr - n);
+			return (_Ptr - n);
 		}
 		difference_type operator-(vector_iterator it) const {
-			return (_ptr - it._ptr);
+			return (_Ptr - it._Ptr);
 		}
 		reference operator[](difference_type i) const {
-			return (*(_ptr + i));
+			return (*(_Ptr + i));
 		}
 		operator vector_iterator<const T> () const {
-			return (vector_iterator<const T>(_ptr));
+			return (vector_iterator<const T>(_Ptr));
 		}
 	};
 	
