@@ -108,77 +108,77 @@ namespace ft
 	};
 	
 	template <typename T>
-	bool operator==(const ft::vector_iterator<T> lhs, const ft::vector_iterator<T> rhs) {
-		return (lhs.base() == rhs.base());
-	}
-	
-	template<typename T_L, typename T_R>
-	bool operator==(const ft::vector_iterator<T_L> lhs, const ft::vector_iterator<T_R> rhs) {
-		return (lhs.base() == rhs.base());
+	bool operator==(const ft::vector_iterator<T> left, const ft::vector_iterator<T> right) {
+		return (left.base() == right.base());
 	}
 	
 	template <typename T>
-	bool operator!=(const ft::vector_iterator<T> lhs, const ft::vector_iterator<T> rhs) {
-		return (lhs.base() != rhs.base());
-	}
-	
-	template<typename T_L, typename T_R>
-	bool operator!=(const ft::vector_iterator<T_L> lhs, const ft::vector_iterator<T_R> rhs) {
-		return (lhs.base() != rhs.base());
+	bool operator!=(const ft::vector_iterator<T> left, const ft::vector_iterator<T> right) {
+		return (left.base() != right.base());
 	}
 	
 	template <typename T>
-	bool operator<(const ft::vector_iterator<T> lhs, const ft::vector_iterator<T> rhs) {
-		return (lhs.base() < rhs.base());
-	}
-	
-	template<typename T_L, typename T_R>
-	bool operator<(const ft::vector_iterator<T_L> lhs, const ft::vector_iterator<T_R> rhs) {
-		return (lhs.base() < rhs.base());
+	bool operator<(const ft::vector_iterator<T> left, const ft::vector_iterator<T> right) {
+		return (left.base() < right.base());
 	}
 	
 	template <typename T>
-	bool operator>(const ft::vector_iterator<T> lhs, const ft::vector_iterator<T> rhs) {
-		return (lhs.base() > rhs.base());
-	}
-	
-	template<typename T_L, typename T_R>
-	bool operator>(const ft::vector_iterator<T_L> lhs, const ft::vector_iterator<T_R> rhs) {
-		return (lhs.base() > rhs.base());
+	bool operator>(const ft::vector_iterator<T> left, const ft::vector_iterator<T> right) {
+		return (left.base() > right.base());
 	}
 	
 	template <typename T>
-	bool operator<=(const ft::vector_iterator<T> lhs, const ft::vector_iterator<T> rhs) {
-		return (lhs.base() <= rhs.base());
-	}
-
-	template<typename T_L, typename T_R>
-	bool operator<=(const ft::vector_iterator<T_L> lhs, const ft::vector_iterator<T_R> rhs) {
-		return (lhs.base() <= rhs.base());
+	bool operator<=(const ft::vector_iterator<T> left, const ft::vector_iterator<T> right) {
+		return (left.base() <= right.base());
 	}
 	
 	template <typename T>
-	bool operator>=(const ft::vector_iterator<T> lhs, const ft::vector_iterator<T> rhs) {
-		return (lhs.base() >= rhs.base());
-	}
-
-	template<typename T_L, typename T_R>
-	bool operator>=(const ft::vector_iterator<T_L> lhs, const ft::vector_iterator<T_R> rhs) {
-		return (lhs.base() >= rhs.base());
+	bool operator>=(const ft::vector_iterator<T> left, const ft::vector_iterator<T> right) {
+		return (left.base() >= right.base());
 	}
 
 	template <typename T>
-	typename ft::vector_iterator<T>::difference_type operator-(const ft::vector_iterator<T> lhs, const ft::vector_iterator<T> rhs) {
-		return (lhs.base() - rhs.base());
-	}
-
-	template<typename T_L, typename T_R>
-	typename ft::vector_iterator<T_L>::difference_type operator-(const ft::vector_iterator<T_L> lhs, const ft::vector_iterator<T_R> rhs) {
-		return (lhs.base() - rhs.base());
+	typename ft::vector_iterator<T>::difference_type operator-(const ft::vector_iterator<T> left, const ft::vector_iterator<T> right) {
+		return (left.base() - right.base());
 	}
 
 	template<typename T>
 	ft::vector_iterator<T> operator+(typename ft::vector_iterator<T>::difference_type n, typename ft::vector_iterator<T>& rai) {
 			return (&(*rai) + n);
+	}
+
+	template<typename T_L, typename T_R>
+	bool operator==(const ft::vector_iterator<T_L> left, const ft::vector_iterator<T_R> right) {
+		return (left.base() == right.base());
+	}
+	
+	template<typename T_L, typename T_R>
+	bool operator!=(const ft::vector_iterator<T_L> left, const ft::vector_iterator<T_R> right) {
+		return (left.base() != right.base());
+	}
+	
+	template<typename T_L, typename T_R>
+	bool operator<(const ft::vector_iterator<T_L> left, const ft::vector_iterator<T_R> right) {
+		return (left.base() < right.base());
+	}
+	
+	template<typename T_L, typename T_R>
+	bool operator>(const ft::vector_iterator<T_L> left, const ft::vector_iterator<T_R> right) {
+		return (left.base() > right.base());
+	}
+
+	template<typename T_L, typename T_R>
+	bool operator<=(const ft::vector_iterator<T_L> left, const ft::vector_iterator<T_R> right) {
+		return (left.base() <= right.base());
+	}
+
+	template<typename T_L, typename T_R>
+	bool operator>=(const ft::vector_iterator<T_L> left, const ft::vector_iterator<T_R> right) {
+		return (left.base() >= right.base());
+	}
+
+	template<typename T_L, typename T_R>
+	typename ft::vector_iterator<T_L>::difference_type operator-(const ft::vector_iterator<T_L> left, const ft::vector_iterator<T_R> right) {
+		return (left.base() - right.base());
 	}
 }
