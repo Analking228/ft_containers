@@ -1,7 +1,7 @@
 #pragma once
 
-#include "utils.hpp"
-#include "./iterators/reverse_iterator.hpp"
+#include "../utils.hpp"
+#include "../iterators/reverse_iterator.hpp"
 
 namespace ft
 {
@@ -46,73 +46,75 @@ namespace ft
 		typedef typename iterator_traits<T>::pointer pointer;
 		typedef typename iterator_traits<T>::reference reference;
 		typedef std::bidirectional_iterator_tag iterator_category;
+
 	private:
-		node *tNull;
-		node *min;
-		node *max;
-		node *ptr;
+		node *_TNull;
+		node *_Min;
+		node *_Max;
+		node *_Ptr;
+
 	public:
 		rbtree_iterator(void){}
-		rbtree_iterator(node *ptr, node *tNull, node *min, node *max): tNull(tNull),min(min), max(max), ptr(ptr){}
-		rbtree_iterator(const rbtree_iterator &src): tNull(src.tNull), min(src.min), max(src.max), ptr(src.ptr){}
+		rbtree_iterator(node *_Ptr, node *_TNull, node *_Min, node *_Max): _TNull(_TNull),_Min(_Min), _Max(_Max), _Ptr(_Ptr){}
+		rbtree_iterator(const rbtree_iterator &src): _TNull(src._TNull), _Min(src._Min), _Max(src._Max), _Ptr(src._Ptr){}
 		~rbtree_iterator(){}
 		rbtree_iterator &operator=(const rbtree_iterator &rhs)
 		{
-			ptr = rhs.ptr;
-			tNull = rhs.tNull;
-			min = rhs.min;
-			max = rhs.max;
+			_Ptr = rhs._Ptr;
+			_TNull = rhs._TNull;
+			_Min = rhs._Min;
+			_Max = rhs._Max;
 			return *this;
 		}
 
-		node *base() const {return ptr;}
-		node *maxptr() const {return max;}
-		node *minptr() const {return min;}
-		node *null() const {return tNull;}
+		node *base() const {return _Ptr;}
+		node *maxptr() const {return _Max;}
+		node *minptr() const {return _Min;}
+		node *null() const {return _TNull;}
 
-		reference operator*(void) const {return this->ptr->data;}
-		pointer operator->(void) const {return &this->ptr->data;}
-		bool check_endings(node *e){return (e == tNull);}
+		reference operator*(void) const {return this->_Ptr->data;}
+		pointer operator->(void) const {return &this->_Ptr->data;}
+		bool check_endings(node *e){return (e == _TNull);}
 		rbtree_iterator &operator++()
 		{
-			if (ptr == NULL || check_endings(ptr))
-				ptr = min;
-			else if (!check_endings(ptr->right))
+			if (_Ptr == NULL || check_endings(_Ptr))
+				_Ptr = _Min;
+			else if (!check_endings(_Ptr->right))
 			{
-				ptr = ptr->right;
-				while (!check_endings(ptr) && !check_endings(ptr->left))
-					ptr = ptr->left;
+				_Ptr = _Ptr->right;
+				while (!check_endings(_Ptr) && !check_endings(_Ptr->left))
+					_Ptr = _Ptr->left;
 			}
 			else
 			{
-				node *tmp = ptr;
-				ptr = ptr->parent;
-				while (!check_endings(ptr) && tmp == ptr->right)
+				node *tmp = _Ptr;
+				_Ptr = _Ptr->parent;
+				while (!check_endings(_Ptr) && tmp == _Ptr->right)
 				{
-					tmp = ptr;
-					ptr = ptr->parent;
+					tmp = _Ptr;
+					_Ptr = _Ptr->parent;
 				}
 		}
 		return (*this);}
 		rbtree_iterator &operator--()
 		{
-			if (!ptr || check_endings(ptr))
-				ptr = max;
-			else if (!check_endings(ptr->left))
+			if (!_Ptr || check_endings(_Ptr))
+				_Ptr = _Max;
+			else if (!check_endings(_Ptr->left))
 			{
-				ptr = ptr->left;
-				while (!check_endings(ptr) && !check_endings(ptr->right))
-					ptr = ptr->right;
+				_Ptr = _Ptr->left;
+				while (!check_endings(_Ptr) && !check_endings(_Ptr->right))
+					_Ptr = _Ptr->right;
 			}
 			else
 			{
 				node *tmp;
-				tmp = ptr;
-				ptr = ptr->parent;
-				while (!check_endings(ptr) && tmp == ptr->left)
+				tmp = _Ptr;
+				_Ptr = _Ptr->parent;
+				while (!check_endings(_Ptr) && tmp == _Ptr->left)
 				{
-					tmp = ptr;
-					ptr = ptr->parent;
+					tmp = _Ptr;
+					_Ptr = _Ptr->parent;
 				}
 			}
 			return (*this);
@@ -130,8 +132,8 @@ namespace ft
 			return (copy);
 		}
 
-		bool operator==(const rbtree_iterator &rhs) const {return this->ptr == rhs.ptr;}
-		bool operator!=(const rbtree_iterator &rhs) const {return this->ptr != rhs.ptr;}
+		bool operator==(const rbtree_iterator &rhs) const {return this->_Ptr == rhs._Ptr;}
+		bool operator!=(const rbtree_iterator &rhs) const {return this->_Ptr != rhs._Ptr;}
 	};
 
 	template <class T>
@@ -145,72 +147,72 @@ namespace ft
 		typedef const T& reference;
 		typedef std::bidirectional_iterator_tag iterator_category;
 	private:
-		node *tNull;
-		node *min;
-		node *max;
-		node *ptr;
+		node *_TNull;
+		node *_Min;
+		node *_Max;
+		node *_Ptr;
 	public:
 		rbtree_const_iterator(void){}
-		rbtree_const_iterator(node *ptr, node *tNull, node *min, node *max): tNull(tNull),min(min), max(max), ptr(ptr){}
-		rbtree_const_iterator(const rbtree_const_iterator &src): tNull(src.tNull), min(src.min), max(src.max), ptr(src.ptr){}
+		rbtree_const_iterator(node *_Ptr, node *_TNull, node *_Min, node *_Max): _TNull(_TNull),_Min(_Min), _Max(_Max), _Ptr(_Ptr){}
+		rbtree_const_iterator(const rbtree_const_iterator &src): _TNull(src._TNull), _Min(src._Min), _Max(src._Max), _Ptr(src._Ptr){}
 
 		rbtree_const_iterator(const rbtree_iterator<T> &src):
-			tNull(src.null()), min(src.minptr()), max(src.maxptr()), ptr(src.base()) {}
+			_TNull(src.null()), _Min(src.minptr()), _Max(src.maxptr()), _Ptr(src.base()) {}
 
 		~rbtree_const_iterator(){}
 		rbtree_const_iterator &operator=(const rbtree_const_iterator &rhs)
 		{
-			ptr = rhs.ptr;
-			tNull = rhs.tNull;
-			min = rhs.min;
-			max = rhs.max;
+			_Ptr = rhs._Ptr;
+			_TNull = rhs._TNull;
+			_Min = rhs._Min;
+			_Max = rhs._Max;
 			return *this;
 		}
-		node *base() const {return ptr;}
-		reference operator*(void) const {return this->ptr->data;}
-		pointer operator->(void) const {return &this->ptr->data;}
-		bool check_endings(node *e){return (e == tNull);}
+		node *base() const {return _Ptr;}
+		reference operator*(void) const {return this->_Ptr->data;}
+		pointer operator->(void) const {return &this->_Ptr->data;}
+		bool check_endings(node *e){return (e == _TNull);}
 		rbtree_const_iterator &operator++()
 		{
-			if (ptr == NULL || check_endings(ptr))
-				ptr = min;
-			else if (!check_endings(ptr->right))
+			if (_Ptr == NULL || check_endings(_Ptr))
+				_Ptr = _Min;
+			else if (!check_endings(_Ptr->right))
 			{
-				ptr = ptr->right;
-				while (!check_endings(ptr) && !check_endings(ptr->left))
-					ptr = ptr->left;
+				_Ptr = _Ptr->right;
+				while (!check_endings(_Ptr) && !check_endings(_Ptr->left))
+					_Ptr = _Ptr->left;
 			}
 			else
 			{
 				node *tmp;
-				tmp = ptr;
-				ptr = ptr->parent;
-				while (!check_endings(ptr) && tmp == ptr->right)
+				tmp = _Ptr;
+				_Ptr = _Ptr->parent;
+				while (!check_endings(_Ptr) && tmp == _Ptr->right)
 				{
-					tmp = ptr;
-					ptr = ptr->parent;
+					tmp = _Ptr;
+					_Ptr = _Ptr->parent;
 				}
 		}
 		return (*this);}
 		rbtree_const_iterator &operator--()
 		{
-			if (!ptr || check_endings(ptr))
-			ptr = max;
-			else if (!check_endings(ptr->left))
+			if (!_Ptr || check_endings(_Ptr))
+			_Ptr = _Max;
+			else if (!check_endings(_Ptr->left))
 			{
-				ptr = ptr->left;
-				while (!check_endings(ptr) && !check_endings(ptr->right))
-					ptr = ptr->right;
+				_Ptr = _Ptr->left;
+				while (!check_endings(_Ptr) && !check_endings(_Ptr->right))
+					_Ptr = _Ptr->right;
 			}
 			else
 			{
 				node *tmp;
-				tmp = ptr;
-				ptr = ptr->parent;
-				while (!check_endings(ptr) && tmp == ptr->left)
+				tmp = _Ptr;
+				_Ptr = _Ptr->parent;
+				while (!check_endings(_Ptr) && tmp == _Ptr->left)
 				{
-					tmp = ptr;
-					ptr = ptr->parent;
+					tmp = _Ptr;
+					_Ptr = _Ptr->parent;
 				}
 			}
 			return (*this);
@@ -228,8 +230,8 @@ namespace ft
 			return (copy);
 		}
 
-		bool operator==(const rbtree_const_iterator &rhs) const {return this->ptr == rhs.ptr;}
-		bool operator!=(const rbtree_const_iterator &rhs) const {return this->ptr != rhs.ptr;}
+		bool operator==(const rbtree_const_iterator &rhs) const {return this->_Ptr == rhs._Ptr;}
+		bool operator!=(const rbtree_const_iterator &rhs) const {return this->_Ptr != rhs._Ptr;}
 	};
 
 	template <class T, class Compare, class Alloc = std::allocator<node<T> > >
@@ -251,44 +253,44 @@ namespace ft
 		typedef ft::reverse_iterator<const_iterator> const_reverse_iterator;
 	private:
 		nodePtr _root;
-		nodePtr tNull;
+		nodePtr _TNull;
 		size_type length;
 		Compare cmp;
 		allocator_type _alloc;
 	public:
 		explicit rbtree(const Compare &comp = Compare(), const allocator_type &alloc = allocator_type()) : length(0), cmp(comp), _alloc(alloc)
 		{
-			tNull =_alloc.allocate(1);
-			_alloc.construct(tNull, node<T>());
-			_root = tNull;
+			_TNull =_alloc.allocate(1);
+			_alloc.construct(_TNull, node<T>());
+			_root = _TNull;
 		}
 		template <class InputIterator>
 		rbtree(InputIterator first, InputIterator last, const Compare &comp = Compare(), const allocator_type &alloc = allocator_type()): length(0), cmp(comp), _alloc(alloc)
 		{
-			tNull =_alloc.allocate(1);
-			_alloc.construct(tNull, node<T>());
-			_root = tNull;
+			_TNull =_alloc.allocate(1);
+			_alloc.construct(_TNull, node<T>());
+			_root = _TNull;
 			insert(first, last);
 		}
 		rbtree(const rbtree &src): length(0), cmp(src.cmp)
 		{
-			tNull =_alloc.allocate(1);
-			_alloc.construct(tNull, node<T>());
-			_root = tNull;
-			copy_branch(src._root, src.tNull);
+			_TNull =_alloc.allocate(1);
+			_alloc.construct(_TNull, node<T>());
+			_root = _TNull;
+			copy_branch(src._root, src._TNull);
 		}
 		~rbtree()
 		{
 			clear();
-			_alloc.destroy(tNull);
-			_alloc.deallocate(tNull, 1);
+			_alloc.destroy(_TNull);
+			_alloc.deallocate(_TNull, 1);
 		}
 		rbtree &operator=(const rbtree &rhs)
 		{
 			if (this != &rhs)
 			{
 				clear();
-				copy_branch(rhs._root, rhs.tNull);
+				copy_branch(rhs._root, rhs._TNull);
 			}
 			return (*this);
 		}
@@ -322,7 +324,7 @@ namespace ft
 			size_type initalLength = size();
 
 			node = this->_root;
-			while (node && node != tNull)
+			while (node && node != _TNull)
 			{
 				if (pred(node->data, data))
 				{
@@ -340,15 +342,15 @@ namespace ft
 		void swap(rbtree<T, Compare> &x)
 		{
 			nodePtr tmp_root = _root;
-			nodePtr tmp_tNull = tNull;
+			nodePtr tmp_tNull = _TNull;
 			size_type tmp_length = size();
 
 			_root = x._root;
-			tNull = x.tNull;
+			_TNull = x._TNull;
 			length = x.length;
 
 			x._root = tmp_root;
-			x.tNull = tmp_tNull;
+			x._TNull = tmp_tNull;
 			x.length = tmp_length;
 		}
 
@@ -380,28 +382,28 @@ namespace ft
 
 		iterator begin()
 		{
-			nodePtr min = minimum();
-			return iterator(min, this->tNull, min, maximum());
+			nodePtr _Min = minimum();
+			return iterator(_Min, this->_TNull, _Min, maximum());
 		}
 		const_iterator begin() const
 		{
-			const_nodePtr min = reinterpret_cast<const_nodePtr>(minimum());
-			const_nodePtr max = reinterpret_cast<const_nodePtr>(maximum());
-			const_nodePtr tNull = reinterpret_cast<const_nodePtr>(this->tNull);
-			return const_iterator(min, tNull, min, max);
+			const_nodePtr _Min = reinterpret_cast<const_nodePtr>(minimum());
+			const_nodePtr _Max = reinterpret_cast<const_nodePtr>(maximum());
+			const_nodePtr _TNull = reinterpret_cast<const_nodePtr>(this->_TNull);
+			return const_iterator(_Min, _TNull, _Min, _Max);
 		}
 
 		iterator end()
 		{
-			nodePtr max = maximum();
-			return ++iterator(max, this->tNull, minimum(), max);
+			nodePtr _Max = maximum();
+			return ++iterator(_Max, this->_TNull, minimum(), _Max);
 		}
 		const_iterator end() const
 		{
-			const_nodePtr min = reinterpret_cast<const_nodePtr>(minimum());
-			const_nodePtr max = reinterpret_cast<const_nodePtr>(maximum());
-			const_nodePtr tNull = reinterpret_cast<const_nodePtr>(this->tNull);
-			return ++const_iterator(max, tNull, min, max);
+			const_nodePtr _Min = reinterpret_cast<const_nodePtr>(minimum());
+			const_nodePtr _Max = reinterpret_cast<const_nodePtr>(maximum());
+			const_nodePtr _TNull = reinterpret_cast<const_nodePtr>(this->_TNull);
+			return ++const_iterator(_Max, _TNull, _Min, _Max);
 		}
 
 		reverse_iterator rbegin() {return reverse_iterator(end());}
@@ -434,17 +436,17 @@ namespace ft
 
 		nodePtr minimum(nodePtr n) const
 		{
-			if (!n || n == tNull)
+			if (!n || n == _TNull)
 				return NULL;
-			while (n->left != tNull)
+			while (n->left != _TNull)
 				n = n->left;
 			return n;
 		}
 		nodePtr maximum(nodePtr n) const
 		{
-			if (!n || n == tNull)
+			if (!n || n == _TNull)
 				return NULL;
-			while (n->right != tNull)
+			while (n->right != _TNull)
 				n = n->right;
 			return n;
 		}
@@ -453,10 +455,10 @@ namespace ft
 		{
 			nodePtr y = x->right;
 			x->right = y->left;
-			if (y->left != tNull)
+			if (y->left != _TNull)
 				y->left->parent = x;
 			y->parent = get_parent(x);
-			if (get_parent(x) == NULL || get_parent(x) == tNull)
+			if (get_parent(x) == NULL || get_parent(x) == _TNull)
 				_root = y;
 			else if (x == get_parent(x)->left)
 				get_parent(x)->left = y;
@@ -470,10 +472,10 @@ namespace ft
 			nodePtr y = x->left;
 			x->left = y->right;
 
-			if (y->right != tNull)
+			if (y->right != _TNull)
 				y->right->parent = x;
 			y->parent = x->parent;
-			if (get_parent(x) == NULL || get_parent(x) == tNull)
+			if (get_parent(x) == NULL || get_parent(x) == _TNull)
 				_root = y;
 			else if (get_parent(x)->right == x)
 				get_parent(x)->right = y;
@@ -487,7 +489,7 @@ namespace ft
 		{
 			++length;
 			nodePtr out = _alloc.allocate(1);
-			_alloc.construct(out, node<T>(data, red, tNull, tNull, parent));
+			_alloc.construct(out, node<T>(data, red, _TNull, _TNull, parent));
 			return out;
 		}
 
@@ -496,44 +498,44 @@ namespace ft
 			iterator it = insert_fix(recRoot, data);
 			insert_check(it.base());
 			recRoot = it.base();
-			while (get_parent(recRoot) && get_parent(recRoot) != tNull)
+			while (get_parent(recRoot) && get_parent(recRoot) != _TNull)
 				recRoot = get_parent(recRoot);
 			this->_root = recRoot;
 			return it;
 		}
 		iterator insert_fix(nodePtr recRoot, const T &data)
 		{
-			if (recRoot != NULL && recRoot != tNull)
+			if (recRoot != NULL && recRoot != _TNull)
 			{
 				if (cmp(data, recRoot->data))
 				{
-					if (recRoot->left != tNull)
+					if (recRoot->left != _TNull)
 						return insert_fix(recRoot->left, data);
 					else
 					{
 						recRoot->left = make_node(data, recRoot);
-						return iterator(recRoot->left, tNull, minimum(), maximum());
+						return iterator(recRoot->left, _TNull, minimum(), maximum());
 					}
 				}
 				else if (cmp(recRoot->data, data))
 				{
-					if (recRoot->right != tNull)
+					if (recRoot->right != _TNull)
 						return insert_fix(recRoot->right, data);
 					else
 					{
 						recRoot->right = make_node(data, recRoot);
-						return iterator(recRoot->right, tNull, minimum(), maximum());
+						return iterator(recRoot->right, _TNull, minimum(), maximum());
 					}
 				}
 				else
-					return iterator(recRoot, tNull, minimum(), maximum());
+					return iterator(recRoot, _TNull, minimum(), maximum());
 			}
 			else
-				return iterator(make_node(data, recRoot), tNull, minimum(), maximum());
+				return iterator(make_node(data, recRoot), _TNull, minimum(), maximum());
 		}
 		void insert_check(nodePtr n)
 		{
-			if (get_parent(n) == NULL || get_parent(n) == tNull)
+			if (get_parent(n) == NULL || get_parent(n) == _TNull)
 				n->color = black;
 			else if (get_parent(n)->color == black)
 				return ;
@@ -573,7 +575,7 @@ namespace ft
 
 		void replace_node(nodePtr u, nodePtr v)
 		{
-			if (u->parent == NULL || u->parent == tNull)
+			if (u->parent == NULL || u->parent == _TNull)
 				_root = v;
 			else if (u == get_parent(u)->left)
 				get_parent(u)->left = v;
@@ -586,16 +588,16 @@ namespace ft
 		{
 			nodePtr x, y = NULL;
 			nodePtr removable = node;
-			if (removable == NULL || removable == tNull)
+			if (removable == NULL || removable == _TNull)
 				return;
 			y = removable;
 			color_type originalColor = removable->color;
-			if (removable->left == tNull)
+			if (removable->left == _TNull)
 			{
 				x = removable->right;
 				replace_node(removable, removable->right);
 			}
-			else if (removable->right == tNull)
+			else if (removable->right == _TNull)
 			{
 				x = removable->left;
 				replace_node(removable, removable->left);
@@ -627,7 +629,7 @@ namespace ft
 			void delete_check(nodePtr x)
 			{
 				nodePtr s;
-				if (x == tNull)
+				if (x == _TNull)
 					return ;
 		
 				while (x != _root && x->color == black)
@@ -710,7 +712,7 @@ namespace ft
 			size_type countIfRec(nodePtr recRoot, Predicate pred, const T &data) const
 			{
 				size_type count = 0;
-				if (!recRoot || recRoot == tNull)
+				if (!recRoot || recRoot == _TNull)
 					return 0;
 				count += countIfRec(recRoot->left, pred, data);
 				count += countIfRec(recRoot->right, pred, data);
