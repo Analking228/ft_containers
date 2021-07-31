@@ -291,15 +291,15 @@ namespace ft{
 	}
 
 	template <class T, class Alloc>
-	bool operator== (const ft::vector<T, Alloc>& lhs, const ft::vector<T, Alloc>& rhs) {
-		if (lhs.size() != rhs.size())
+	bool operator== (const ft::vector<T, Alloc>& left, const ft::vector<T, Alloc>& right) {
+		if (left.size() != right.size())
 			return (false);
 
-		typename ft::vector<T>::const_iterator first1 = lhs.begin();
-		typename ft::vector<T>::const_iterator first2 = rhs.begin();
-		while (first1 != lhs.end())
+		typename ft::vector<T>::const_iterator first1 = left.begin();
+		typename ft::vector<T>::const_iterator first2 = right.begin();
+		while (first1 != left.end())
 		{
-			if (first2 == rhs.end() || *first1 != *first2)
+			if (first2 == right.end() || *first1 != *first2)
 				return (false);
 			++first1;
 			++first2;
@@ -309,28 +309,28 @@ namespace ft{
 	}
 	
 	template <class T, class Alloc>
-	bool operator!= (const vector<T, Alloc>& lhs, const vector<T, Alloc>& rhs) {
-		return (!(rhs == lhs));
+	bool operator!= (const vector<T, Alloc>& left, const vector<T, Alloc>& right) {
+		return (!(right == left));
 	}
 	
 	template <class T, class Alloc>
-	bool operator< (const vector<T, Alloc>& lhs, const vector<T, Alloc>& rhs) {
-		return (ft::lexicographical_compare(lhs.begin(), lhs.end(), rhs.begin(), rhs.end()));
+	bool operator< (const vector<T, Alloc>& left, const vector<T, Alloc>& right) {
+		return (ft::lexicographical_compare(left.begin(), left.end(), right.begin(), right.end()));
 	}
 	
 	template <class T, class Alloc>
-	bool operator<= (const vector<T, Alloc>& lhs, const vector<T, Alloc>& rhs) {
-		return (!(rhs < lhs));
+	bool operator<= (const vector<T, Alloc>& left, const vector<T, Alloc>& right) {
+		return (!(right < left));
 	}
 	
 	template <class T, class Alloc>
-	bool operator>  (const vector<T, Alloc>& lhs, const vector<T, Alloc>& rhs) {
-		return (rhs < lhs);
+	bool operator>  (const vector<T, Alloc>& left, const vector<T, Alloc>& right) {
+		return (right < left);
 	}
 	
 	template <class T, class Alloc>
-	bool operator>= (const vector<T, Alloc>& lhs, const vector<T, Alloc>& rhs) {
-		return (!(lhs < rhs));
+	bool operator>= (const vector<T, Alloc>& left, const vector<T, Alloc>& right) {
+		return (!(left < right));
 	}
 	
 }
