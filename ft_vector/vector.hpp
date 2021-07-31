@@ -264,11 +264,11 @@ namespace ft{
 				_Alloc.construct(ptr.base(), *first);
 			_Size += dist;
 		}
-		void swap(vector<T> & y){
-			ft::swap(_Alloc, y._Alloc);
-			ft::swap(_Ptr, y._Ptr);
-			ft::swap(_Size, y._Size);
-			ft::swap(_Capacity, y._Capacity);
+		void swap(vector<T> & other){
+			ft::swap(_Alloc, other._Alloc);
+			ft::swap(_Ptr, other._Ptr);
+			ft::swap(_Size, other._Size);
+			ft::swap(_Capacity, other._Capacity);
 		}
 		void clear(){
 			erase(begin(),end());
@@ -286,8 +286,8 @@ namespace ft{
 
 	/*NON MEM_FUNC*/
 	template <typename T>
-	void swap (ft::vector<T> & x, ft::vector<T>& y) {
-		x.swap(y);
+	void swap (ft::vector<T> & x, ft::vector<T>& other) {
+		x.swap(other);
 	}
 
 	template <class T, class Alloc>
